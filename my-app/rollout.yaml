@@ -12,7 +12,7 @@ spec:
         - pause: {}
   selector:
     matchLabels:
-      app:
+      app: pataradzma
   template:
     metadata:
       labels:
