@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: my-app
+  name: pataradzma
   namespace: default
 spec:
   replicas: 3
@@ -12,14 +12,14 @@ spec:
         - pause: {}
   selector:
     matchLabels:
-      app: my-app
+      app:
   template:
     metadata:
       labels:
-        app: my-app
+        app: pataradzma
     spec:
       containers:
-        - name: my-app
-          image: my-app-image:my-tag
+        - name: pataradzma
+          image: nginx:latest
           ports:
             - containerPort: 80
