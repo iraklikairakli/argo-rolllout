@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
         - name: pataradzma
-          image: nginx:1.27.0
+          image: nginx:latest
           ports:
             - containerPort: 80
