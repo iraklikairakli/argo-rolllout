@@ -7,7 +7,7 @@ spec:
   replicas: 1
   strategy:
     blueGreen:
-      activeService: your-app-service
+      activeService: pataradzma-service
       autoPromotionEnabled: true
   selector:
     matchLabels:
@@ -26,10 +26,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: your-app-service
+  name: pataradzma-service
 spec:
   selector:
-    app: your-app
+    app: pataradzma
   ports:
     - protocol: TCP
       port: 80
