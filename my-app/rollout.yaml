@@ -6,7 +6,9 @@ metadata:
 spec:
   replicas: 3
   strategy:
-    type: Recreate
+    canary:
+      steps:
+        - setWeight: 100
   selector:
     matchLabels:
       app: pataradzma
