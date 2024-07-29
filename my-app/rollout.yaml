@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: my-app
+  namespace: default
+spec:
+  replicas: 3
+  strategy:
+    canary:
+      steps:
+        - setWeight: 30
+        - pause: {}
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+        - name: my-app
+          image: my-app-image:my-tag
+          ports:
+            - containerPort: 80
