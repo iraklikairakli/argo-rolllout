@@ -20,7 +20,7 @@ spec:
         ports:
         - containerPort: 8080
   strategy:
-    blueGreen: 
+    blueGreen:
       # activeService specifies the service to update with the new template hash at time of promotion.
       # This field is mandatory for the blueGreen update strategy.
       activeService: rollout-bluegreen-active
@@ -33,3 +33,26 @@ spec:
       # stack as soon as the ReplicaSet are completely ready/available.
       # Rollouts can be resumed using: `kubectl argo rollouts promote ROLLOUT`
       autoPromotionEnabled: false
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-active
+spec:
+  selector:
+    app: rollout-bluegreen
+  ports:
+    - port: 80
+      targetPort: 8080
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rollout-bluegreen-preview
+spec:
+  selector:
+    app: rollout-bluegreen
+  ports:
+    - port: 80
+      targetPort: 8080
