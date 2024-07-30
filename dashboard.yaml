@@ -1,19 +1,14 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: v1
+kind: Service
 metadata:
-  name: rollouts-ingress
-  annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
+  name: argo-rollouts-dashboard
+  namespace: argo-rollouts
 spec:
-  ingressClassName: nginx
-  rules:
-    - host: devops-rollout.crocobet.local
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: argo-rollouts-dashboard
-                port:
-                  number: 3100
+  type: NodePort
+  ports:
+    - port: 3100          # Internal port used by the Argo Rollouts dashboard
+      targetPort: 3100     # The container port exposed by the Rollouts pod
+      nodePort: 32100      # NodePort to expose (range 30000-32767)
+  selector:
+    app.kubernetes.io/name: argo-rollouts
+
